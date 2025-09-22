@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import connectdb from "./config/db.js";
 import authRoute from "./routes/authRoute.js";
+import blogRoute from "./routes/blogRoute.js";
 
 dotenv.config();
 
@@ -12,7 +13,9 @@ app.use(cors());
 
 connectdb();
 
+// Turning the routes on ------
 app.use("/api/auth", authRoute);
+app.use("/api/post", blogRoute);
 
 app.get("/", (req, res) => {
   res.send("API is running ✅");
