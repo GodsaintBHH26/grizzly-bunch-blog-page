@@ -25,7 +25,7 @@ function FootDown() {
           <h1 className="font-semibold text-4xl">Contents</h1>
           <div className="grid grid-cols-4 gap-2 text-white mt-5">
             { aboutPageLinks.map((e) => {
-              return <p className="hover:underline cursor-pointer">{e}</p>;
+              return <p key={e} className="hover:underline cursor-pointer">{e}</p>;
             })}
           </div>
         </div>

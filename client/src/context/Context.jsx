@@ -6,16 +6,18 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(localStorage.getItem("token") || null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const savedUser = localStorage.getItem("user");
     const savedToken = localStorage.getItem("token");
 
-    if (token && user) {
+    if (savedToken && savedUser) {
       setToken(savedToken);
       setUser(JSON.parse(savedUser));
     }
-  });
+    setLoading(false);
+  }, []);
 
   const loginUser = async (uemail, upassword) => {
     const res = await api.post("/auth/login", { uemail, upassword });
@@ -26,11 +28,11 @@ export const AuthProvider = ({ children }) => {
     return res.data;
   };
 
-  const registerUser = async (uemail, upassword) => {
-    const res = await api.post("/auth/register", { uemail, upassword });
+  const registerUser = async (uname, uemail, upassword) => {
+    const res = await api.post("/auth/register", { uname, uemail, upassword });
     localStorage.setItem("token", res.data.token);
     localStorage.setItem("user", JSON.stringify(res.data.user));
-    setToken(res.data.toke);
+    setToken(res.data.token);
     setUser(res.data.user);
     return res.data;
   };
@@ -44,9 +46,9 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ loginUser, user, token, registerUser, logoutUser }}
+      value={{ loginUser, user, token, registerUser, logoutUser, loading }}
     >
-        {children}
+      {children}
     </AuthContext.Provider>
   );
 };

@@ -54,20 +54,53 @@ export const showAllPosts = async (req, res) => {
   try {
     const posts = await blog
       .find({ author: authorId })
-      .select("author title blogContent slug")
-      .sort({ createdAt: -1 }).populate("author", "uname");
+      .select("author title blogContent slug createdAt updatedAt")
+      .sort({ createdAt: -1 })
+      .populate("author", "uname");
     res.status(200).json({ msg: "Fetched all the posts 📤", posts });
   } catch (error) {
     res.status(500).json({ msg: error.message });
   }
 };
+// Fetching recent blogs ------------------->
+export const showRecentPosts = async (req, res) => {
+  try {
+    const posts = await blog
+      .find()
+      .select("author title blogContent slug createdAt updatedAt")
+      .sort({ createdAt: -1 }).limit(10)
+      .populate("author", "uname");
+    res.status(200).json({ msg: "Fetched all recent posts 📤", posts });
+  } catch (error) {
+    res.status(500).json({ msg: error.message });
+  }
+};
+// Fetching A single post from the database ---------->
+export const showThisPost = async (req, res)=>{
+  const {slug}=req.params;
+
+  try {
+    const post = await blog.findOne({slug}).select('author title blogContent slug createdAt updatedAt').populate('author', 'uname');
+    if(!post) return res.status(404).json({msg:'Post not found ⛔'});
+    res.status(200).json({msg:"Post fetched successfully ✅", post});
+  } catch (error) {
+    res.status(500).json({msg:error.message})
+  }
+}
 
 // Deleting a post/blog by the user --------------->
 export const deletePost = async (req, res) => {
   const { slug } = req.params;
   try {
-    const deleteEntry = await blog.findOneAndDelete({ slug: slug });
-    res.status(200).json({ msg: "Post deleted succsefully 🧹", deleteEntry });
+    const post = await blog.findOne({ slug: slug });
+    if (!post) {
+      return res.status(404).json({ msg: "Post not found ⛔" });
+    }
+    if (post.author.toString() !== req.user.uid) {
+      return res.status(403).json({ msg: "You are not allowed to delete this post 🚫" });
+    }
+    await post.deleteOne();
+    res.status(200).json({ msg: "Post deleted succsefully 🧹", post });
   } catch (error) {
     res.status(500).json({ msg: error.message });
   }

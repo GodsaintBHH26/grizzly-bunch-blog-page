@@ -5,11 +5,17 @@ import {
   editPost,
   postCreation,
   showAllPosts,
+  showRecentPosts,
+  showThisPost,
 } from "../controllers/blogController.js";
 
 const router = express.Router();
 
-router.get("/:authorId", showAllPosts);
+// Fetch posts here
+router.get("/recent", showRecentPosts);
+router.get("/author/:authorId", showAllPosts);
+router.get("/slug/:slug", showThisPost);
+
 
 // Create, Edit, delete post here
 router.post("/create", authMiddleware, postCreation);
