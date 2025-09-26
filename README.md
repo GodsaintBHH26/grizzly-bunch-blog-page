@@ -1,59 +1,135 @@
-# Grizzly Bunch
+# 🐻 Grizzly Bunch
 
-Grizzly Bunch is a modern social blogging platform where users can share stories, interact with others, and discover content from a vibrant community. It combines ease of use with interactive features to create an engaging blogging experience.
-
----
-
-## Table of Contents
-
-- [Features](#features)  
-- [Tech Stack](#tech-stack)  
-- [Getting Started](#getting-started)  
-- [Folder Structure](#folder-structure)  
-- [API Endpoints](#api-endpoints)  
-- [Usage](#usage)  
-- [Contributing](#contributing)  
-- [License](#license)  
+Grizzly Bunch is a **social blogging platform** where users can share their stories, interact with others, and discover engaging content.  
+Built with a **React (Vite) frontend** and **Node.js + Express + MongoDB backend**, this project demonstrates a modern full-stack web app setup.
 
 ---
 
-## Features
+## 🚀 Features
+- 🔐 **Authentication** – User signup, login, and JWT-based auth
+- 📝 **Create, Read, Delete Blogs** – Users can publish their own posts and browse others
+- 🎨 **Interactive UI** – Animations, transitions, and reusable UI components
+- 👤 **User Accounts** – Profile pages with posts, profile picture, and cover image
+- 📡 **REST API** – Cleanly structured backend with controllers, models, and routes
+- ⚡ **Frontend** – Fast development setup with Vite and React
 
-- **User Authentication**: Signup, login, and secure session handling.  
-- **Blog Posts**: Create, read, update, and delete blog posts.  
-- **Fuzzy Search**: Find blogs quickly with a flexible search system.  
-- **Interactive UI**: Like, comment, and share posts.  
-- **Dynamic Slugs**: Unique URLs for each post.  
-- **Responsive Design**: Works seamlessly on mobile and desktop.  
+---
+Website Link - https://grizzly-bunch.netlify.app/
+---
+
+## 📂 Project Structure
+├── client/ # Frontend (React + Vite)
+│ ├── src/
+│ │ ├── components/ # UI + Layout components
+│ │ ├── context/ # Auth context
+│ │ ├── pages/ # App pages (Feed, Login, Post, etc.)
+│ │ └── api/ # Axios API helper
+│ └── public/ # Static assets
+│
+└── server/ # Backend (Node.js + Express + MongoDB)
+├── config/ # Database connection
+├── controllers/ # Auth + Blog controllers
+├── middleware/ # JWT authentication
+├── models/ # Mongoose schemas
+└── routes/ # API routes
 
 ---
 
-## Tech Stack
+## 🛠️ Tech Stack
+**Frontend**
+- React (Vite)
+- React Router
+- Axios
+- Tailwind CSS / Custom CSS
+- AOS (Animate On Scroll)
 
-- **Frontend**: React.js, Tailwind CSS, React Router  
-- **Backend**: Node.js, Express.js  
-- **Database**: MongoDB with Mongoose  
-- **Authentication**: JWT (JSON Web Tokens)  
-- **Other Libraries**: bcrypt, slugify, toastify, AOS for animations  
+**Backend**
+- Node.js + Express
+- MongoDB + Mongoose
+- JWT (JSON Web Tokens)
+- Bcrypt (Password hashing)
 
 ---
 
-## Getting Started
+## ⚙️ Setup & Installation
 
-### Prerequisites
-
-- Node.js (v18+)  
-- MongoDB  
-
-### Installation
-
-1. Clone the repository:  
+### 1️⃣ Clone the Repository
 ```bash
-git clone https://github.com/yourusername/grizzly-bunch.git
+git clone https://github.com/your-username/grizzly-bunch.git
+cd grizzly-bunch
 
+2️⃣ Install Dependencies
 
-# *License* 
+Client
 
-I can also create a **version with badges, screenshots, and live links** so it looks professional on GitHub if you want. Do you want me to do that?
+cd client
+npm install
 
+Server
 
+cd ../server
+npm install
+
+3️⃣ Setup Environment Variables
+
+In /server, create a .env file:
+
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_secret_key
+PORT=3000
+
+4️⃣ Run the App
+
+Backend
+
+cd server
+npm run dev
+
+Frontend
+
+cd client
+npm run dev
+```
+---
+📌 Available Scripts
+
+Frontend (client)
+
+npm run dev – Run development server
+
+npm run build – Build production bundle
+
+npm run preview – Preview production build
+
+Backend (server)
+
+npm run dev – Run server with nodemon
+
+npm start – Run production server
+
+🤝 Contributing
+
+Contributions are welcome!
+
+Fork the repo
+
+Create a new branch (feature/your-feature)
+
+Commit changes
+
+Open a Pull Request
+
+📜 License
+
+This project is licensed under the MIT License.
+
+🌟 Acknowledgements
+
+React + Vite
+
+Node.js + Express
+
+MongoDB + Mongoose
+
+AOS & React Bits for UI animations.
+---
